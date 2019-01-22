@@ -26,7 +26,6 @@ export default class CreateGateway extends Component {
     }
 
     componentDidMount() {
-
         axios.get('http://localhost:4000/peripheral')
             .then(response => {
                 this.setState({options: response.data});
@@ -35,14 +34,13 @@ export default class CreateGateway extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-
     }
-
 
     onChangeSerialNumber(e) {
         this.setState({
             serial: e.target.value
         });
+
     }
 
     onChangeName(e) {
@@ -79,7 +77,6 @@ export default class CreateGateway extends Component {
             .catch(function (error) {
                 alert(error)
             });
-
         this.setState({
             serial: '',
             name: '',
