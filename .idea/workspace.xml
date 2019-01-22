@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8d6f79b5-1801-4eab-93c3-206890027a66" name="Default" comment="update">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/ReactCRUD.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/webResources.xml" afterPath="" />
+    <list default="true" id="8d6f79b5-1801-4eab-93c3-206890027a66" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -350,7 +345,7 @@
       <updated>1548086739942</updated>
       <workItem from="1548086743243" duration="6687000" />
       <workItem from="1548100825353" duration="16751000" />
-      <workItem from="1548173703407" duration="1628000" />
+      <workItem from="1548173703407" duration="1888000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1548174523890</created>
@@ -380,11 +375,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548175293564</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="delete">
+      <created>1548175392427</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1548175392427</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25066000" />
+    <option name="totallyTimeSpent" value="25326000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -442,7 +444,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
