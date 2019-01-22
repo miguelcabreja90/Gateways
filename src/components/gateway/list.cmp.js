@@ -32,11 +32,8 @@ export default class ListGateway extends Component {
     render() {
         return (
             <div style={{marginTop: 10}} className="content table-responsive table-full-width">
-
-                <Link to={'/gateway/create'} className="btn btn-primary fa fa-plus"> Create</Link>
-
-
                 <h3 align="center">Gateway List</h3>
+                <Link to={'/gateway/create'} className="btn btn-primary fa fa-plus"> Create</Link>
                 <table className="table table-hover" style={{marginTop: 20}}>
                     <thead>
                     <tr>

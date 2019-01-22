@@ -15,13 +15,9 @@ export default class EditPeripheral extends Component {
             uid: '',
             vendor: '',
             date: new Date(),
-            status: ''
+            status: 0
         };
-        this.status = [
-            {label: "Online", value: 1},
-            {label: "Offline", value: 0},
 
-        ];
         this.onChangeUID = this.onChangeUID.bind(this);
         this.onChangeVendor = this.onChangeVendor.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
@@ -34,7 +30,6 @@ export default class EditPeripheral extends Component {
     componentDidMount() {
         axios.get('http://localhost:4000/peripheral/findBy/' + this.props.match.params.id)
             .then(response => {
-                console.log(response)
                 this.setState({
                     uid: response.data.uid,
                     vendor: response.data.vendor,
@@ -67,7 +62,6 @@ export default class EditPeripheral extends Component {
     }
 
     onChangeStatus(e) {
-        console.log(e)
         this.setState({
             status: e.value
         })
@@ -81,17 +75,23 @@ export default class EditPeripheral extends Component {
             date: this.state.date,
             status: this.state.status
         };
-        console.log(obj)
         axios.post('http://localhost:4000/peripheral/update/' + this.props.match.params.id, obj)
             .then(res => {
                 console.log(res.data);
                 this.props.history.push('/peripheral/listing');
+            })
+            .catch(function (error) {
+                alert(error)
             });
 
 
     }
 
     render() {
+        let options = [
+            {label: "Online", value: 1},
+            {label: "Offline", value: 0},
+        ];
         return (
             <div style={{marginTop: 10}}>
                 <h3 align="center">Edit Peripheral</h3>
@@ -119,19 +119,18 @@ export default class EditPeripheral extends Component {
                         <DatePicker
                             selected={ this.state.date }
                             onChange={ this.onChangeDate }
-                            dateFormat="DD/MM/YYYY"/>
+                            dateFormat="DD/MM/YYYY" dropdownMode="select"/>
                     </div>
                     <div className="form-group">
                         <label>Status: </label>
-                        <Select options={ this.status } onChange={this.onChangeStatus}/>
+                        <Select value={this.state.status} options={ options } onChange={this.onChangeStatus}/>
                     </div>
 
                     <div className="form-group">
-
                         <div layout="row">
-                            <input type="submit" value="Update" className="btn btn-primary"/>
+                            <button type="submit" value="Register" className="btn btn-primary fa fa-save"> Save</button>
                             <Link style={{marginLeft: 5}} to={"/peripheral/listing"}
-                                  className="btn btn-dark">Cancel</Link>
+                                  className="btn btn-dark fa fa-close"> Cancel</Link>
 
                         </div>
                     </div>

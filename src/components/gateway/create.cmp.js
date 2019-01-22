@@ -75,6 +75,9 @@ export default class CreateGateway extends Component {
         axios.post('http://localhost:4000/gateway/create', obj)
             .then(res => {
                 console.log(res.data)
+            })
+            .catch(function (error) {
+                alert(error)
             });
 
         this.setState({
@@ -89,7 +92,7 @@ export default class CreateGateway extends Component {
     render() {
         let options = this.state.options;
         let optionItems = [];
-        for (var i = 0; i < options.length; i++) {
+        for (let i = 0; i < options.length; i++) {
             optionItems.push({
                 value: options[i]._id,
                 label: options[i].vendor
@@ -134,8 +137,9 @@ export default class CreateGateway extends Component {
                     </div>
                     <div className="form-group">
                         <div layout="row">
-                            <input type="submit" value="Register" className="btn btn-primary"/>
-                            <Link style={{marginLeft: 5}} to={"/gateway/listing"} className="btn btn-dark">Cancel</Link>
+                            <button type="submit" value="Register" className="btn btn-primary fa fa-save"> Save</button>
+                            <Link style={{marginLeft: 5}} to={"/gateway/listing"} className="btn btn-dark fa fa-close">
+                                Cancel</Link>
                         </div>
                     </div>
                 </form>

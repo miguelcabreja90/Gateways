@@ -31,8 +31,8 @@ export default class ListPeripheral extends Component {
     render() {
         return (
             <div style={{marginTop: 10}} className="content table-responsive table-full-width">
-                <Link to={'/peripheral/create'} className="btn btn-primary fa fa-plus"> Create</Link>
                 <h3 align="center">Peripheral List</h3>
+                <Link to={'/peripheral/create'} className="btn btn-primary fa fa-plus"> Create</Link>
                 <table className="table table-hover" style={{marginTop: 20}}>
                     <thead>
                     <tr>
@@ -40,7 +40,7 @@ export default class ListPeripheral extends Component {
                         <th>Vendor</th>
                         <th>Date</th>
                         <th>Status</th>
-                        <th colSpan="3">Action</th>
+                        <th colSpan="2">Action</th>
                     </tr>
                     </thead>
                     <tbody>

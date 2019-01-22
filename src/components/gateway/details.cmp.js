@@ -13,7 +13,6 @@ export default class DetailsGateway extends Component {
     componentDidMount() {
         axios.get('http://localhost:4000/gateway/findBy/' + this.props.match.params.id)
             .then(response => {
-                console.log(response)
                 this.setState({
                     serial: response.data.serial,
                     name: response.data.name,
@@ -30,8 +29,10 @@ export default class DetailsGateway extends Component {
         if (this.state.peripheral) {
             return this.state.peripheral.map(function (obj, i) {
                 return <tr key={i}>
-                    <td>{obj.label}</td>
+                    <td align="center">{obj.label }
+                    </td>
                 </tr>
+
             })
 
         }
@@ -39,22 +40,29 @@ export default class DetailsGateway extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginTop: 20}}>
                 <h3 align="center">Details</h3>
-                <p><b>Serial Number:</b> {this.state.serial}</p>
-                <p><b>Name:</b> {this.state.name}</p>
-                <p><b>IP Address:</b> {this.state.ipaddress}</p>
-                <table className="table table-hover" style={{marginTop: 20}}>
-                    <thead align="center">
-                    <tr>
-                        <th>Peripheral Device</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    { this.tabRow()}
-                    </tbody>
-                </table>
-                <Link to={"/gateway/listing"} className="btn btn-dark">Close</Link>
+                <div className="row">
+                    <div className="col-md-6">
+                        <p><b> Serial Number: </b> {this.state.serial}</p>
+                        <p><b> Name: </b> {this.state.name}</p>
+                        <p><b> IP Address: </b> {this.state.ipaddress}</p>
+                    </div>
+                    <div className="col-md-6">
+                        <h4 align="center">Peripheral Device</h4>
+                        <table className="table table-hover">
+                            <thead align="center">
+                            <tr>
+                                <th>Vendor</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            { this.tabRow()}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <Link to={"/gateway/listing"} className="btn btn-dark fa fa-close"> Close</Link>
             </div>
         )
     }

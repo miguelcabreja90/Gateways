@@ -21,13 +21,8 @@ export default class CreatePeripheral extends Component {
             uid: '',
             vendor: '',
             date: new Date(),
-            status: ''
+            status: 0
         };
-        this.status = [
-            { label: "Online", value: 1 },
-            { label: "Offline", value: 0 },
-
-        ];
     }
 
     onChangeUID(e) {
@@ -63,17 +58,27 @@ export default class CreatePeripheral extends Component {
             status: this.state.status
         };
         axios.post('http://localhost:4000/peripheral/create', obj)
-            .then(res => console.log(res.data));
-        alert('Successfull');
-        this.setState({
-            uid: '',
-            vendor: '',
-            date: new Date(),
-            status: ''
-        })
+            .then(res => {
+                console.log(res.data);
+                alert('Successfull');
+                this.setState({
+                    uid: '',
+                    vendor: '',
+                    date: new Date(),
+                    status: ''
+                })
+            })
+            .catch(function (error) {
+                alert(error)
+            });
     }
 
     render() {
+        let optionItems = [
+            {label: "Online", value: 1},
+            {label: "Offline", value: 0},
+
+        ];
         return (
             <div style={{marginTop: 10}}>
                 <h3 align="center">New Peripheral</h3>
@@ -104,20 +109,21 @@ export default class CreatePeripheral extends Component {
                             selected={ this.state.date }
                             onChange={ this.onChangeDate }
                             name="startDate"
-                            dateFormat="MM/DD/YYYY"/>
+                            dateFormat="MM/DD/YYYY" dropdownMode="select"/>
                     </div>
                     <div className="form-group">
                         <div className="form-group">
                             <label>Status: </label>
-                            <Select options={ this.status } onChange={this.onChangeStatus} />
+                            <Select options={ optionItems } onChange={this.onChangeStatus}/>
                         </div>
                     </div>
 
                     <div className="form-group">
                         <div className="form-group">
                             <div layout="row">
-                                <input type="submit" value="Register" className="btn btn-primary"/>
-                                <Link style={{marginLeft: 5}} to={"/peripheral/listing"} className="btn btn-dark">Cancel</Link>
+                                <button type="submit" className="btn btn-primary fa fa-save"> Save</button>
+                                <Link style={{marginLeft: 5}} to={"/peripheral/listing"}
+                                      className="btn btn-dark fa fa-close"> Cancel</Link>
                             </div>
                         </div>
                     </div>

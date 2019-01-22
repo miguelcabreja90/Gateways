@@ -6,14 +6,15 @@ class TableRow extends Component {
 
     constructor(props) {
         super(props);
-        this.delete = this.delete.bind(this);
+        this.remove = this.remove.bind(this);
     }
 
-    delete() {
-        if (window.confirm('Are you sure you want to delete?')) {
-            axios.get('http://localhost:4000/gateway/delete/' + this.props.obj._id)
+    remove() {
+        if (window.confirm('Are you sure you want to remove?')) {
+            axios.get('http://localhost:4000/gateway/remove/' + this.props.obj._id)
                 .then(res => {
-                    console.log('Deleted')
+                    console.log('Deleted');
+                    console.log(res);
                 })
                 .catch(err => console.log(err))
         }
@@ -33,13 +34,16 @@ class TableRow extends Component {
                     {this.props.obj.ipaddress}
                 </td>
                 <td>
-                    <Link to={"/gateway/details/" + this.props.obj._id} className="btn btn-info fa fa-info"></Link>
+                    <Link to={"/gateway/details/" + this.props.obj._id} rel="tooltip" title="Details"
+                          className="btn btn-sm btn-info fa fa-info"/>
                 </td>
                 <td>
-                    <Link to={"/gateway/edit/" + this.props.obj._id} className="btn btn-primary fa fa-edit"></Link>
+                    <Link to={"/gateway/edit/" + this.props.obj._id} rel="tooltip" title="Edit"
+                          className="btn btn-sm btn-primary fa fa-edit"/>
                 </td>
                 <td>
-                    <button onClick={this.delete} className="btn btn-danger fa fa-minus"></button>
+                    <button onClick={this.remove} rel="tooltip" title="Remove"
+                            className="btn btn-sm btn-danger fa fa-minus"/>
                 </td>
             </tr>
         );

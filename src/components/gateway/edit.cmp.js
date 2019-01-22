@@ -19,28 +19,29 @@ export default class EditPeripheral extends Component {
             serial: '',
             name: '',
             ipaddress: '',
-            peripheral: ''
-        }
-        this.techCompanies = [
-            { label: "Apple", value: 1 },
-            { label: "Facebook", value: 2 },
-            { label: "Netflix", value: 3 },
-            { label: "Tesla", value: 4 },
-            { label: "Amazon", value: 5 },
-            { label: "Alphabet", value: 6 },
-        ];
+            peripheral: [],
+            options: []
+        };
     }
 
     componentDidMount() {
         axios.get('http://localhost:4000/gateway/findBy/' + this.props.match.params.id)
             .then(response => {
-                console.log(response)
+                console.log(response);
                 this.setState({
                     serial: response.data.serial,
                     name: response.data.name,
                     ipaddress: response.data.ipaddress,
                     peripheral: response.data.peripheral
                 });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        axios.get('http://localhost:4000/peripheral')
+            .then(response => {
+                this.setState({options: response.data});
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -82,14 +83,25 @@ export default class EditPeripheral extends Component {
         };
         axios.post('http://localhost:4000/gateway/update/' + this.props.match.params.id, obj)
             .then(res => {
-                console.log(res.data)
+                console.log(res.data);
                 this.props.history.push('/gateway/listing');
+            })
+            .catch(function (error) {
+                alert(error)
             });
 
 
     }
 
     render() {
+        let options = this.state.options;
+        let optionItems = [];
+        for (let i = 0; i < options.length; i++) {
+            optionItems.push({
+                value: options[i]._id,
+                label: options[i].vendor
+            })
+        }
         return (
             <div style={{marginTop: 10}}>
                 <h3 align="center">Edit Gateway</h3>
@@ -125,14 +137,15 @@ export default class EditPeripheral extends Component {
                     </div>
                     <div className="form-group">
                         <label>Peripheral: </label>
-                        <Select options={ this.techCompanies } value={this.state.peripheral}
-                                onChange={this.onChangePeripheral} isMulti />
+                        <Select value={this.state.peripheral} options={optionItems}
+                                onChange={this.onChangePeripheral} isMulti/>
 
                     </div>
                     <div className="form-group">
                         <div layout="row">
-                            <input type="submit" value="Update" className="btn btn-primary"/>
-                            <Link style={{marginLeft: 5}} to={"/gateway/listing"} className="btn btn-dark">Cancel</Link>
+                            <button type="submit" value="Register" className="btn btn-primary fa fa-save"> Save</button>
+                            <Link style={{marginLeft: 5}} to={"/gateway/listing"} className="btn btn-dark fa fa-close">
+                                Cancel</Link>
                         </div>
                     </div>
                 </form>

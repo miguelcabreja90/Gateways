@@ -18,13 +18,13 @@ import EditPeripheral from './components/peripheral/edit.cmp';
 class App extends Component {
     render() {
         return (
+
             <Router>
                 <div className="container">
                     <nav className="navbar navbar-expand navbar-dark bg-dark">
                         <Link to={'/home'} className="navbar-brand">React </Link>
 
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
                             <ul className="navbar-nav mr-auto">
                                 <li className="nav-item">
                                     <Link to={'/home'} className="nav-link fa fa-home"> Home </Link>
@@ -64,6 +64,7 @@ class App extends Component {
                     </Switch>
                 </div>
             </Router>
+
         );
     }
 }
