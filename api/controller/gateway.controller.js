@@ -55,13 +55,15 @@ exports.update = function (req, res) {
                     gateway.name = req.body.name;
                     gateway.ipaddress = req.body.ipaddress;
                     gateway.peripheral = req.body.peripheral;
-                    gateway.save().then(gateway => {
-                        res.json('Update complete');
-                    }).catch(err => {
+                    gateway.save()
+                        .then(gateway => {
+                            res.json({'gateway': 'Update complete', 'id': gateway._id});
+                        }).catch(err => {
                         res.status(400).send('unable to update the database');
                     });
                 } else {
                     res.status(400).send('unable to update is bad ipaddress IPv4');
+
                 }
 
             } else {

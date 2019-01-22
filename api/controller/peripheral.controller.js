@@ -44,9 +44,10 @@ exports.update = function (req, res) {
             peripheral.date = req.body.date;
             peripheral.status = req.body.status;
 
-            peripheral.save().then(peripheral => {
-                res.json('Update complete');
-            })
+            peripheral.save()
+                .then(peripheral => {
+                    res.json({'peripheral': 'Update complete', 'id': peripheral._id});
+                })
                 .catch(err => {
                     res.status(400).send("unable to update the database");
                 });
