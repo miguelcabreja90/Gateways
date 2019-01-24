@@ -11,7 +11,7 @@ export default class ListGateway extends Component {
         this.state = {gateway: [], peripheral: []};
     }
 
-    componentDidMount() {
+    componentDidMount=()=> {
         axios.get('http://localhost:4000/gateway')
             .then(response => {
                 this.setState({gateway: response.data});
@@ -21,13 +21,13 @@ export default class ListGateway extends Component {
             })
 
 
-    }
+    };
 
-    tabRow() {
+    tabRow=()=> {
         return this.state.gateway.map(function (object, i) {
             return <TableRow obj={object} key={i}/>;
         });
-    }
+    };
 
     render() {
         return (

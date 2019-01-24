@@ -4,13 +4,14 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+
 export default class DetailsGateway extends Component {
     constructor(props) {
         super(props);
         this.state = {gateway: []};
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get('http://localhost:4000/gateway/findBy/' + this.props.match.params.id)
             .then(response => {
                 this.setState({
@@ -23,20 +24,20 @@ export default class DetailsGateway extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-    }
+    };
 
-    tabRow() {
+    tabRow = () => {
         if (this.state.peripheral) {
             return this.state.peripheral.map(function (obj, i) {
                 return <tr key={i}>
-                    <td align="center">{obj.label }
+                    <td align="center">{obj.label}
                     </td>
                 </tr>
 
             })
 
         }
-    }
+    };
 
     render() {
         return (
@@ -57,7 +58,7 @@ export default class DetailsGateway extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            { this.tabRow()}
+                            {this.tabRow()}
                             </tbody>
                         </table>
                     </div>

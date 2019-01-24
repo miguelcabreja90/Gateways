@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
+import {toast} from "react-toastify";
 
 export default class CreateGateway extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class CreateGateway extends Component {
 
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get('http://localhost:4000/peripheral')
             .then(response => {
                 this.setState({options: response.data});
@@ -34,36 +35,36 @@ export default class CreateGateway extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-    }
+    };
 
-    onChangeSerialNumber(e) {
+    onChangeSerialNumber = (event) => {
         this.setState({
-            serial: e.target.value
+            serial: event.target.value
         });
 
-    }
+    };
 
-    onChangeName(e) {
+    onChangeName = (event) => {
         this.setState({
-            name: e.target.value
+            name: event.target.value
         })
-    }
+    };
 
-    onChangeIpAddres(e) {
+    onChangeIpAddres = (event) => {
         this.setState({
-            ipaddress: e.target.value
+            ipaddress: event.target.value
         })
-    }
+    };
 
-    onChangePeripheral(e) {
+    onChangePeripheral = (event) => {
         this.setState({
-            peripheral: e
+            peripheral: event
         })
 
-    }
+    };
 
-    onSubmit(e) {
-        e.preventDefault();
+    onSubmit = (event) => {
+        event.preventDefault();
         const obj = {
             serial: this.state.serial,
             name: this.state.name,
@@ -72,10 +73,16 @@ export default class CreateGateway extends Component {
         };
         axios.post('http://localhost:4000/gateway/create', obj)
             .then(res => {
-                console.log(res.data)
+                console.log(res.data);
+                toast.success("Success Create !",{
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: true
+                });
             })
             .catch(function (error) {
-                alert(error)
+                toast.error(error.toString(),{
+                    hideProgressBar: true
+                });
             });
         this.setState({
             serial: '',
@@ -84,7 +91,7 @@ export default class CreateGateway extends Component {
             peripheral: []
         })
 
-    }
+    };
 
     render() {
         let options = this.state.options;
@@ -130,7 +137,7 @@ export default class CreateGateway extends Component {
                     </div>
                     <div className="form-group">
                         <label>Peripheral: </label>
-                        <Select options={ optionItems } onChange={this.onChangePeripheral} isMulti/>
+                        <Select options={optionItems} onChange={this.onChangePeripheral} isMulti/>
                     </div>
                     <div className="form-group">
                         <div layout="row">

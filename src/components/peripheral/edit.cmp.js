@@ -7,6 +7,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
+import {toast} from "react-toastify";
 
 export default class EditPeripheral extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ export default class EditPeripheral extends Component {
 
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get('http://localhost:4000/peripheral/findBy/' + this.props.match.params.id)
             .then(response => {
                 this.setState({
@@ -40,35 +41,31 @@ export default class EditPeripheral extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-    }
+    };
 
-
-    onChangeUID(e) {
+    onChangeUID = event => {
         this.setState({
-            uid: e.target.value
+            uid: event.target.value
         });
-    }
-
-    onChangeVendor(e) {
+    };
+    onChangeVendor = event => {
         this.setState({
-            vendor: e.target.value
-        })
-    }
-
-    onChangeDate(e) {
+            vendor: event.target.value
+        });
+    };
+    onChangeDate = event => {
         this.setState({
-            date: e
-        })
-    }
-
-    onChangeStatus(e) {
+            date: event
+        });
+    };
+    onChangeStatus = event => {
         this.setState({
-            status: e.value
-        })
-    }
+            status: event.value
+        });
+    };
 
-    onSubmit(e) {
-        e.preventDefault();
+    onSubmit = event => {
+        event.preventDefault();
         const obj = {
             uid: this.state.uid,
             vendor: this.state.vendor,
@@ -76,16 +73,23 @@ export default class EditPeripheral extends Component {
             status: this.state.status
         };
         axios.post('http://localhost:4000/peripheral/update/' + this.props.match.params.id, obj)
+
             .then(res => {
                 console.log(res.data);
+                toast.success("Success Update !", {
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: true
+                });
                 this.props.history.push('/peripheral/listing');
             })
             .catch(function (error) {
-                alert(error)
+                toast.error(error.toString(),{
+                    hideProgressBar: true
+                });
             });
 
 
-    }
+    };
 
     render() {
         let options = [
@@ -117,13 +121,13 @@ export default class EditPeripheral extends Component {
                     <div className="form-group">
                         <label>Date: </label>
                         <DatePicker
-                            selected={ this.state.date }
-                            onChange={ this.onChangeDate }
+                            selected={this.state.date}
+                            onChange={this.onChangeDate}
                             dateFormat="DD/MM/YYYY" dropdownMode="select"/>
                     </div>
                     <div className="form-group">
                         <label>Status: </label>
-                        <Select value={this.state.status} options={ options } onChange={this.onChangeStatus}/>
+                        <Select options={options} onChange={this.onChangeStatus}/>
                     </div>
 
                     <div className="form-group">

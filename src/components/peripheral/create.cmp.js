@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-select';
 import axios from 'axios';
+import {toast} from "react-toastify";
 
 export default class CreatePeripheral extends Component {
     constructor(props) {
@@ -25,32 +26,28 @@ export default class CreatePeripheral extends Component {
         };
     }
 
-    onChangeUID(e) {
+    onChangeUID = event => {
         this.setState({
-            uid: e.target.value
+            uid: event.target.value
         });
-    }
-
-    onChangeVendor(e) {
+    };
+    onChangeVendor = event => {
         this.setState({
-            vendor: e.target.value
-        })
-    }
-
-    onChangeDate(e) {
+            vendor: event.target.value
+        });
+    };
+    onChangeDate = event => {
         this.setState({
-            date: e
-        })
-    }
-
-    onChangeStatus(e) {
+            date: event
+        });
+    };
+    onChangeStatus = event => {
         this.setState({
-            status: e.value
-        })
-    }
-
-    onSubmit(e) {
-        e.preventDefault();
+            status: event.value
+        });
+    };
+    onSubmit = event => {
+        event.preventDefault();
         const obj = {
             uid: this.state.uid,
             vendor: this.state.vendor,
@@ -60,7 +57,10 @@ export default class CreatePeripheral extends Component {
         axios.post('http://localhost:4000/peripheral/create', obj)
             .then(res => {
                 console.log(res.data);
-                alert('Successfull');
+                toast.success("Success Create !", {
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: true
+                });
                 this.setState({
                     uid: '',
                     vendor: '',
@@ -69,9 +69,11 @@ export default class CreatePeripheral extends Component {
                 })
             })
             .catch(function (error) {
-                alert(error)
+                toast.error(error.toString(),{
+                    hideProgressBar: true
+                });
             });
-    }
+    };
 
     render() {
         let optionItems = [
@@ -106,15 +108,15 @@ export default class CreatePeripheral extends Component {
                     <div className="form-group">
                         <label>Date: </label>
                         <DatePicker
-                            selected={ this.state.date }
-                            onChange={ this.onChangeDate }
+                            selected={this.state.date}
+                            onChange={this.onChangeDate}
                             name="startDate"
                             dateFormat="MM/DD/YYYY" dropdownMode="select"/>
                     </div>
                     <div className="form-group">
                         <div className="form-group">
                             <label>Status: </label>
-                            <Select options={ optionItems } onChange={this.onChangeStatus}/>
+                            <Select options={optionItems} onChange={this.onChangeStatus}/>
                         </div>
                     </div>
 

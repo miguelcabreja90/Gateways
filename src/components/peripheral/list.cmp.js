@@ -5,13 +5,14 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import TableRow from './TableRow';
+
 export default class ListPeripheral extends Component {
     constructor(props) {
         super(props);
         this.state = {peripheral: []};
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get('http://localhost:4000/peripheral')
             .then(response => {
                 this.setState({peripheral: response.data});
@@ -20,13 +21,13 @@ export default class ListPeripheral extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-    }
+    };
 
-    tabRow() {
+    tabRow = () => {
         return this.state.peripheral.map(function (object, i) {
             return <TableRow obj={object} key={i}/>;
         });
-    }
+    };
 
     render() {
         return (
@@ -44,7 +45,7 @@ export default class ListPeripheral extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    { this.tabRow() }
+                    {this.tabRow()}
                     </tbody>
                 </table>
             </div>

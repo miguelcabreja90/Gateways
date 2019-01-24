@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {toast} from "react-toastify";
 
 class TableRow extends Component {
 
@@ -9,16 +10,21 @@ class TableRow extends Component {
         this.remove = this.remove.bind(this);
     }
 
-    remove() {
+    remove = () => {
         if (window.confirm('Are you sure you want to remove?')) {
-            axios.get('http://localhost:4000/peripheral/remove/' + this.props.obj._id)
+            axios.get('http://localhost:4000/peripheral/delete/' + this.props.obj._id)
                 .then(res => {
-                    console.log('Deleted');
+                    toast.success("Success Deleted !", {
+                        position: toast.POSITION.TOP_CENTER,
+                        hideProgressBar: true
+                    });
                     console.log(res)
                 })
-                .catch(err => console.log(err));
+                .catch(err => toast.error(err.toString(),{
+                    hideProgressBar: true
+                }));
         }
-    }
+    };
 
     render() {
         return (

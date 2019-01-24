@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
+import {toast} from "react-toastify";
 
 export default class EditPeripheral extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ export default class EditPeripheral extends Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get('http://localhost:4000/gateway/findBy/' + this.props.match.params.id)
             .then(response => {
                 console.log(response);
@@ -46,35 +47,36 @@ export default class EditPeripheral extends Component {
             .catch(function (error) {
                 console.log(error);
             })
-    }
+    };
 
-    onChangeSerialNumber(e) {
+    onChangeSerialNumber = (event) => {
         this.setState({
-            serial: e.target.value
+            serial: event.target.value
         });
-    }
 
-    onChangeName(e) {
+    };
+
+    onChangeName = (event) => {
         this.setState({
-            name: e.target.value
+            name: event.target.value
         })
-    }
+    };
 
-    onChangeIpAddres(e) {
+    onChangeIpAddres = (event) => {
         this.setState({
-            ipaddress: e.target.value
+            ipaddress: event.target.value
         })
-    }
+    };
 
-    onChangePeripheral(e) {
+    onChangePeripheral = (event) => {
         this.setState({
-            peripheral: e
+            peripheral: event
         })
 
-    }
+    };
 
-    onSubmit(e) {
-        e.preventDefault();
+    onSubmit = (event) => {
+        event.preventDefault();
         const obj = {
             serial: this.state.serial,
             name: this.state.name,
@@ -84,14 +86,20 @@ export default class EditPeripheral extends Component {
         axios.post('http://localhost:4000/gateway/update/' + this.props.match.params.id, obj)
             .then(res => {
                 console.log(res.data);
+                toast.success("Success Update !",{
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: true
+                });
                 this.props.history.push('/gateway/listing');
             })
-            .catch(function (error) {
-                alert(error)
+            .catch(function (e) {
+                toast.error(e.toString(),{
+                    hideProgressBar: true
+                });
             });
 
 
-    }
+    };
 
     render() {
         let options = this.state.options;
