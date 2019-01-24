@@ -2,6 +2,7 @@
  * Created by Migue on 19/1/2019.
  */
 import React, {Component} from 'react';
+
 export default class Index extends Component {
 
 

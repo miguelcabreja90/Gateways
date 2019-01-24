@@ -5,13 +5,14 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import TableRow from './TableRow';
+
 export default class ListGateway extends Component {
     constructor(props) {
         super(props);
         this.state = {gateway: [], peripheral: []};
     }
 
-    componentDidMount=()=> {
+    componentDidMount = () => {
         axios.get('http://localhost:4000/gateway')
             .then(response => {
                 this.setState({gateway: response.data});
@@ -23,7 +24,7 @@ export default class ListGateway extends Component {
 
     };
 
-    tabRow=()=> {
+    tabRow = () => {
         return this.state.gateway.map(function (object, i) {
             return <TableRow obj={object} key={i}/>;
         });
@@ -44,7 +45,7 @@ export default class ListGateway extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    { this.tabRow() }
+                    {this.tabRow()}
                     </tbody>
                 </table>
             </div>

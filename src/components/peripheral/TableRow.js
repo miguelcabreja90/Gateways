@@ -20,7 +20,7 @@ class TableRow extends Component {
                     });
                     console.log(res)
                 })
-                .catch(err => toast.error(err.toString(),{
+                .catch(err => toast.error(err.toString(), {
                     hideProgressBar: true
                 }));
         }

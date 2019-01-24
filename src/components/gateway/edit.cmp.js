@@ -86,14 +86,14 @@ export default class EditPeripheral extends Component {
         axios.post('http://localhost:4000/gateway/update/' + this.props.match.params.id, obj)
             .then(res => {
                 console.log(res.data);
-                toast.success("Success Update !",{
+                toast.success("Success Update !", {
                     position: toast.POSITION.TOP_CENTER,
                     hideProgressBar: true
                 });
                 this.props.history.push('/gateway/listing');
             })
             .catch(function (e) {
-                toast.error(e.toString(),{
+                toast.error(e.toString(), {
                     hideProgressBar: true
                 });
             });

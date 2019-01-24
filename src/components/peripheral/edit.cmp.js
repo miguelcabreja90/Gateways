@@ -83,7 +83,7 @@ export default class EditPeripheral extends Component {
                 this.props.history.push('/peripheral/listing');
             })
             .catch(function (error) {
-                toast.error(error.toString(),{
+                toast.error(error.toString(), {
                     hideProgressBar: true
                 });
             });

@@ -69,7 +69,7 @@ export default class CreatePeripheral extends Component {
                 })
             })
             .catch(function (error) {
-                toast.error(error.toString(),{
+                toast.error(error.toString(), {
                     hideProgressBar: true
                 });
             });

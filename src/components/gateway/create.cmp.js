@@ -74,13 +74,13 @@ export default class CreateGateway extends Component {
         axios.post('http://localhost:4000/gateway/create', obj)
             .then(res => {
                 console.log(res.data);
-                toast.success("Success Create !",{
+                toast.success("Success Create !", {
                     position: toast.POSITION.TOP_CENTER,
                     hideProgressBar: true
                 });
             })
             .catch(function (error) {
-                toast.error(error.toString(),{
+                toast.error(error.toString(), {
                     hideProgressBar: true
                 });
             });
