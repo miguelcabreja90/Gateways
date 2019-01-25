@@ -8,10 +8,12 @@ class TableRow extends Component {
     constructor(props) {
         super(props);
         this.remove = this.remove.bind(this);
+        this.state = {
+            show: false
+        };
     }
 
     remove = () => {
-
         if (window.confirm('Are you sure you want to remove?')) {
             axios.get('http://localhost:4000/gateway/delete/' + this.props.obj._id)
                 .then(res => {
@@ -19,6 +21,7 @@ class TableRow extends Component {
                         position: toast.POSITION.TOP_CENTER,
                         hideProgressBar: true
                     });
+                    this.props.parent.componentDidMount();
                     console.log(res);
                 })
                 .catch(err => toast.error(err.toString(), {

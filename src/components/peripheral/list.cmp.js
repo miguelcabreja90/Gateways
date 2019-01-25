@@ -24,8 +24,9 @@ export default class ListPeripheral extends Component {
     };
 
     tabRow = () => {
+        let parent = this;
         return this.state.peripheral.map(function (object, i) {
-            return <TableRow obj={object} key={i}/>;
+            return <TableRow obj={object} key={i} parent={parent}/>;
         });
     };
 

@@ -18,6 +18,7 @@ class TableRow extends Component {
                         position: toast.POSITION.TOP_CENTER,
                         hideProgressBar: true
                     });
+                    this.props.parent.componentDidMount();
                     console.log(res)
                 })
                 .catch(err => toast.error(err.toString(), {
